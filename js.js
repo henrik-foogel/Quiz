@@ -6,6 +6,7 @@
         var answers = document.getElementById('answers');
         var userInput = document.getElementById('input');
         var correctAnswers = 0;
+        var howManyQuestions;
 
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -13,13 +14,14 @@
 
         req.onreadystatechange = function() {
             if(req.readyState == 4) {
-                if(req.status == 200) {           
+                if(req.status == 200) {   
+                    userInput.value = "";        
                     changeInnerHtml();
                 }
             }
         };
 
-        req.open("GET", "https://opentdb.com/api.php?amount=4&category=11&difficulty=easy&type=multiple");
+        req.open("GET", "https://opentdb.com/api.php?amount=7&category=11&difficulty=easy&type=multiple");
 
         req.responseType = "json";
         req.send();
@@ -27,8 +29,18 @@
 
         });
 
+        var decodeHTML = function (html) {
+            var txt = document.createElement('textarea');
+            txt.innerHTML = html;
+            return txt.value;
+        };
+
         function checkIfCorrect() {
-            if(userInput.value == res.results[currentQuestion].correct_answer) {
+
+            var decodedInput = decodeHTML(userInput.value);
+            var decodedCorrectAnswer = decodeHTML(res.results[currentQuestion].correct_answer);
+            
+            if(decodedInput == decodedCorrectAnswer) {
                 alert("Correct!!");
                 userInput.value = "";
                 correctAnswers++
@@ -38,17 +50,20 @@
                 userInput.value = "";
                 currentQuestion++
             }
-            if (currentQuestion <= 3) {
+            if (currentQuestion < howManyQuestions) {
                 removeLastQuestionAnswer();
                 changeInnerHtml()
             } else {
-                alert("Correct answers: " + correctAnswers +" out of 4")
+                alert("Correct answers: " + correctAnswers +" out of " + howManyQuestions)
                 removeLastQuestionAnswer();
             }
+            console.log("Current: " + currentQuestion)
         }
 
         function changeInnerHtml() {
                     res = req.response;
+
+                    howManyQuestions = res.results.length;
 
                     question.innerHTML = res.results[currentQuestion].question;
 
