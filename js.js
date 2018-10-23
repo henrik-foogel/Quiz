@@ -3,12 +3,20 @@
         var question = document.getElementById('question');
         var currentQuestion = 0;
         var answersArray = [];
+        var h2 = document.getElementsByClassName('questionAnswer');
         var answers = document.getElementById('answers');
         var userInput = document.getElementById('input');
+        var sendButton = document.getElementById('sendButton');
+        var difficultyButton = document.getElementsByClassName('difficultyButton');
+        var h3 = document.getElementsByTagName('h3');
         var correctAnswers = 0;
         var howManyQuestions;
+        var easyButton = document.getElementById('easyButton')
 
-        document.addEventListener('DOMContentLoaded', function() {
+
+        easyButton.addEventListener('click', function() {
+
+        onClickVisibility();
 
         req = new XMLHttpRequest;
 
@@ -28,6 +36,52 @@
         console.log(req);
 
         });
+
+        mediumButton.addEventListener('click', function() {
+
+            onClickVisibility();
+    
+            req = new XMLHttpRequest;
+    
+            req.onreadystatechange = function() {
+                if(req.readyState == 4) {
+                    if(req.status == 200) {   
+                        userInput.value = "";        
+                        changeInnerHtml();
+                    }
+                }
+            };
+    
+            req.open("GET", "https://opentdb.com/api.php?amount=7&category=11&difficulty=medium&type=multiple");
+    
+            req.responseType = "json";
+            req.send();
+            console.log(req);
+    
+            });
+
+            hardButton.addEventListener('click', function() {
+
+                onClickVisibility();
+        
+                req = new XMLHttpRequest;
+        
+                req.onreadystatechange = function() {
+                    if(req.readyState == 4) {
+                        if(req.status == 200) {   
+                            userInput.value = "";        
+                            changeInnerHtml();
+                        }
+                    }
+                };
+        
+                req.open("GET", "https://opentdb.com/api.php?amount=7&category=11&difficulty=hard&type=multiple");
+        
+                req.responseType = "json";
+                req.send();
+                console.log(req);
+        
+                });
 
         var decodeHTML = function (html) {
             var txt = document.createElement('textarea');
@@ -86,6 +140,25 @@
             question.innerHTML = null;
             answersArray = [];
             answers.innerHTML = null;
+        }
+
+        function onClickVisibility() {
+
+            for(i = 0; i < h2.length; i++) {
+                h2[i].style = "visibility: visible";
+            }
+
+            for(i = 0; i < difficultyButton.length; i++) {
+                difficultyButton[i].style = "visibility: hidden";
+            }
+
+            for(i = 0; i < h3.length; i++) {
+                h3[i].style = "visibility: hidden";
+            }
+
+            sendButton.style = "visibility: visible";
+            input.style = "visibility: visible"
+
         }
 
         Array.prototype.shuffle = function() {

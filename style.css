@@ -2,4 +2,16 @@
     float: left;
     position: relative;
     width: 100%;
+} 
+
+#input {
+    visibility: hidden;
+}
+
+#sendButton {
+    visibility: hidden;
+}
+
+.questionAnswer {
+    visibility: hidden;
 }
