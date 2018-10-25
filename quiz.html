@@ -2,9 +2,10 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="style.css">
+        <title>Movie Quiz</title>
     </head>
-
-    <h1> QUIZ </h1>
+    <body>
+    <h1> MOVIE QUIZ </h1>
     <h3>Choose Difficulty</h3>
     <button type="button" id="easyButton" class="difficultyButton">Easy</button>
     <button type="button" id="mediumButton" class="difficultyButton">Medium</button>
@@ -14,9 +15,10 @@
     <h2 class="questionAnswer" id="ans"> Answers: </h2>
     <div id="answers"></div>
     <div id="inputDiv">
-    <input type="text" id="input">
+    <input type="text" id="input" placeholder="Case sensitive">
     <button id="sendButton" onclick="checkIfCorrect()">Send</button>   
     </div> 
+    </body>
     <script src="js.js"></script>
 
 </html>

@@ -99,11 +99,8 @@
 
             var decodedInput = decodeHTML(userInput.value);
             var decodedCorrectAnswer = decodeHTML(res.results[currentQuestion].correct_answer);
-
-            decodedInput.trim;
-            decodedCorrectAnswer.trim;
             
-            if(decodedInput.toUpperCase == decodedCorrectAnswer.toUpperCase) {
+            if(decodedInput === decodedCorrectAnswer) {
                 alert("Correct!!");
                 userInput.value = "";
                 correctAnswers++
