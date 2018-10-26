@@ -83,7 +83,6 @@
         
             req.responseType = "json";
             req.send();
-            console.log(req);
         
         });
 
@@ -134,10 +133,8 @@
             for(let i = 0; i < 3; i++) {
                 answersArray.push(res.results[currentQuestion].incorrect_answers[i]);
             }
-            console.log("before shuffle: " + answersArray);
 
             answersArray.shuffle();
-            console.log("after shuffle: " + answersArray);
 
             for(i = 0; i <= 3; i++) {
                 answers.innerHTML += answersArray[i] + "<br>";
